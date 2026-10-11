@@ -1,0 +1,20 @@
+# 上游 AgentScope-Java 源码（按根目录 AGENTSCOPE_JAVA_UPSTREAM_README.md 自行 clone）
+src/agentscope-java/
+
+# 构建产物
+target/
+*/target/
+*/*/target/
+
+# 运行日志（可能含 dev 随机生成密码）
+*.log
+
+# 本地 embedding 模型文件（~92MB，需单独下载 bge-small-zh-v1.5 放入该目录）
+scripts/docker/tei-model/bge-small-zh-v1.5/
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+Thumbs.db
+.DS_Store

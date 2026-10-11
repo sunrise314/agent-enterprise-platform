@@ -1,0 +1,10 @@
+[ {
+  "caseId" : "a-002",
+  "type" : "adversarial",
+  "question" : "公司食堂每周的菜单安排是怎样的？",
+  "fail" : false,
+  "hallucination" : true,
+  "semanticScore" : 5,
+  "reason" : "contains forbidden keywords",
+  "capturedAtMs" : 1791646764254
+} ]

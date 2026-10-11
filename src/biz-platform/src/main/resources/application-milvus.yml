@@ -1,0 +1,37 @@
+# Milvus 实机验证配置：H2 内存库 + Milvus(19530) + 本地 TEI embedding(18080)。
+# 启动：SPRING_PROFILES_ACTIVE=milvus  +  DEEPSEEK_API_KEY=<key>
+spring:
+  datasource:
+    url: jdbc:h2:mem:agent_platform;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# 向量检索：本地 TEI（text-embeddings-inference，bge-small-zh-v1.5，维度 512）
+rag:
+  embedding:
+    base-url: ${EMBEDDING_URL:http://localhost:18080}
+    api-key: ""
+    model: BAAI/bge-small-zh-v1.5
+    dimension: 512
+  milvus:
+    host: ${MILVUS_HOST:localhost}
+    port: ${MILVUS_PORT:19530}
+    topk: 5
+
+agent:
+  llm:
+    model: deepseek:deepseek-chat
+
+logging:
+  level:
+    io.agentscope: INFO
+    com.agent.biz: DEBUG

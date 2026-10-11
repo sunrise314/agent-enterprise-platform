@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: biz-platform
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/agent_platform}
+    username: ${DB_USER:agent}
+    password: ${DB_PASS:agent}
+    hikari:
+      maximum-pool-size: 20
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 3s
+
+server:
+  port: 8080
+
+agent:
+  # Agent 配置
+  max-tool-rounds: 8          # 最大工具调用轮次（防死循环）
+  timeout-seconds: 60         # 单次 Agent 执行超时
+  llm:
+    base-url: ${LLM_BASE_URL:https://api.deepseek.com}
+    api-key: ${LLM_API_KEY:}
+    model: ${MODEL_NAME:deepseek:deepseek-chat}
+    max-retries: 3
+  session:
+    ttl-seconds: 86400        # 会话过期时间（1 天）
+
+milvus:
+  host: ${MILVUS_HOST:localhost}
+  port: ${MILVUS_PORT:19530}
+  collection: kb_chunk_vec
+
+opensearch:
+  host: ${OS_HOST:localhost}
+  port: ${OS_PORT:9200}
+
+eval:
+  judge-model: ${JUDGE_MODEL:qwen2.5:14b}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus

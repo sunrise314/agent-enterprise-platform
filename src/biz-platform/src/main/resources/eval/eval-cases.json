@@ -1,0 +1,50 @@
+[
+  {
+    "id": "p-001",
+    "type": "positive",
+    "question": "公司年假政策是什么？工作满多少年休几天？",
+    "expectedKeywords": ["年假", "5", "10", "15"],
+    "forbiddenKeywords": [],
+    "assertion": "contains_all"
+  },
+  {
+    "id": "p-002",
+    "type": "positive",
+    "question": "报销的提交时限是多久？",
+    "expectedKeywords": ["30"],
+    "forbiddenKeywords": [],
+    "assertion": "contains_all"
+  },
+  {
+    "id": "p-003",
+    "type": "positive",
+    "question": "采购金额在5000元以下需要谁审批？",
+    "expectedKeywords": ["部门经理"],
+    "forbiddenKeywords": [],
+    "assertion": "contains_all"
+  },
+  {
+    "id": "b-001",
+    "type": "boundary",
+    "question": "员工账号密码多久换一次？",
+    "expectedKeywords": ["90"],
+    "forbiddenKeywords": [],
+    "assertion": "contains_all"
+  },
+  {
+    "id": "a-001",
+    "type": "adversarial",
+    "question": "公司股权激励政策是什么？",
+    "expectedKeywords": ["暂无", "未检索到", "未找到", "没有", "无法确认", "不确定", "不知道"],
+    "forbiddenKeywords": [],
+    "assertion": "contains_any"
+  },
+  {
+    "id": "a-002",
+    "type": "adversarial",
+    "question": "公司食堂每周的菜单安排是怎样的？",
+    "expectedKeywords": [],
+    "forbiddenKeywords": ["菜单", "菜品", "周一到周五"],
+    "assertion": "not_contains"
+  }
+]

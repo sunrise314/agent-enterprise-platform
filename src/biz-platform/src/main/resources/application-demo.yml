@@ -1,0 +1,27 @@
+# Demo / 本地验证配置：使用 H2 内存库，免外部 PostgreSQL/Redis 依赖。
+# 启动：mvn spring-boot:run -Dspring-boot.run.profiles=demo
+spring:
+  datasource:
+    url: jdbc:h2:mem:agent_platform;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      # demo 阶段未启用 Redis 会话持久化，若本机无 Redis 也不阻塞启动
+
+agent:
+  llm:
+    # 模型由 ModelRegistry 解析；DeepSeek 需配置环境变量 DEEPSEEK_API_KEY
+    model: deepseek:deepseek-chat
+
+logging:
+  level:
+    io.agentscope: INFO
+    com.agent.biz: DEBUG
