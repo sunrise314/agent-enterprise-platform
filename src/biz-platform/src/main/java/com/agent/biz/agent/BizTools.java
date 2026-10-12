@@ -3,6 +3,7 @@ package com.agent.biz.agent;
 import com.agent.biz.audit.AuditLogger;
 import com.agent.biz.auth.TenantInfo;
 import com.agent.biz.rag.RagService;
+import com.agent.biz.tool.SqlQueryTool;
 import io.agentscope.core.tool.Tool;
 import io.agentscope.core.tool.ToolParam;
 import io.agentscope.core.tool.Toolkit;
@@ -30,10 +31,12 @@ public class BizTools {
 
     private final RagService ragService;
     private final AuditLogger audit;
+    private final SqlQueryTool sqlQueryTool;
 
-    public BizTools(RagService ragService, AuditLogger audit) {
+    public BizTools(RagService ragService, AuditLogger audit, SqlQueryTool sqlQueryTool) {
         this.ragService = ragService;
         this.audit = audit;
+        this.sqlQueryTool = sqlQueryTool;
     }
 
     /**
@@ -78,11 +81,12 @@ public class BizTools {
     }
 
     /**
-     * 构建业务 Toolkit 并注册本类全部 @Tool 方法。
+     * 构建业务 Toolkit 并注册本类全部 @Tool 方法 + SQL 沙箱查询工具。
      */
     public Toolkit buildToolkit() {
         Toolkit toolkit = new Toolkit();
         toolkit.registerTool(this);
+        toolkit.registerTool(sqlQueryTool);
         return toolkit;
     }
 }
